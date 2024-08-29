@@ -1,8 +1,11 @@
 import './App.css';
+import AddTrip from './components/AddTripForm';
 
 
 function App() {
-  return <></>
+  return <>
+    <AddTrip />
+  </>
 }
 
 export default App;
