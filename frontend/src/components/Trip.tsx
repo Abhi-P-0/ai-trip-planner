@@ -2,6 +2,8 @@ import { format } from "date-fns";
 import { Trip, Props } from "../types";
 import { useState } from "react";
 
+import "./Trip.css";
+
 
 function TripCard({trip, onDelete, onAddNote, onDeleteNote, index}: Props) {
     const [newNote, setNewNote] = useState("");

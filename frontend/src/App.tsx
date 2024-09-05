@@ -15,7 +15,13 @@ function App() {
   return <>
     <AddTrip />
 
-    <TripList trips={trips.data.map((trip) => trip.data)}/>
+    <TripList 
+      trips={trips.data.map((trip) => trip.data)}
+      onDelete={onDelete}
+      onAddNote={onAddNote}
+      onDeleteNote={onDeleteNote}
+    
+    />
   </>
 }
 
