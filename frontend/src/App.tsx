@@ -8,11 +8,44 @@ function App() {
   const collection = useCollection<Trip>("trips");
   const trips = useQuery(collection.query());
 
-  const onDelete = (id: string) => {};
-  const onAddNote = (tripID: string, note: string) => {};
-  const onDeleteNote = (tripID: string, noteIndex: number) => {};
+  const findTrip = (id: string) => {
+    return trips.data.find((trip) => trip.data.id === id)
+  };
 
-  return <>
+  const onDelete = (id: string) => {
+    const trip = findTrip(id);
+
+    if (trip) trip.delete();
+  };
+  
+  const onAddNote = (tripID: string, note: string) => {
+    const trip = findTrip(tripID);
+
+    if (!trip) return;
+
+    const notes = trip.data.notes;
+    notes.push(note);
+
+    trip.update({
+      notes: notes
+    });
+
+  };
+
+  const onDeleteNote = (tripID: string, noteIndex: number) => {
+    const trip = findTrip(tripID);
+
+    if (!trip) return;
+
+    const notes = trip.data.notes;
+
+    trip.update({
+      notes: notes.filter((_, index) => index !== noteIndex)
+    });
+  };
+
+  return (
+    <div className='card'>
     <AddTrip />
 
     <TripList 
@@ -22,7 +55,8 @@ function App() {
       onDeleteNote={onDeleteNote}
     
     />
-  </>
+    </div>
+  );
 }
 
 export default App;
